@@ -13,8 +13,8 @@ class App extends Component {
 
   sceneSetup = () => {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xffffff); // white background
-    // this.scene.background = new THREE.Color(0x000000); // black background
+    // this.scene.background = new THREE.Color(0xffffff); // white background
+    this.scene.background = new THREE.Color(0x000000); // black background
 
     this.camera = new THREE.PerspectiveCamera(
       35,
@@ -22,7 +22,7 @@ class App extends Component {
       0.1,
       100
     );
-    this.camera.position.z = 10;
+    this.camera.position.z = 9;
 
     this.controls = new OrbitControls(this.camera, this.el);
     this.controls.enableZoom = true;
@@ -122,8 +122,10 @@ class App extends Component {
     };
 
     gltfLoader.load(
-      "/TheAppAge-v2.glb",
-      gltf => onLoad(gltf),
+      "/quads-trips.glb",
+      gltf => {
+        onLoad(gltf);
+      },
       onProgress,
       onError
     );
@@ -131,14 +133,14 @@ class App extends Component {
 
   animate = () => {
     requestAnimationFrame(this.animate);
-    // this.cubeOne.rotation.x += 0.01;
-    // this.cubeOne.rotation.y += 0.01;
-    // this.cubeTwo.rotation.x += 0.01;
-    // this.cubeTwo.rotation.y += 0.01;
-    // this.cubeThree.rotation.x += 0.01;
-    // this.cubeThree.rotation.y += 0.01;
+    //   // this.cubeOne.rotation.x += 0.01;
+    //   // this.cubeOne.rotation.y += 0.01;
+    //   // this.cubeTwo.rotation.x += 0.01;
+    //   // this.cubeTwo.rotation.y += 0.01;
+    //   // this.cubeThree.rotation.x += 0.01;
+    //   // this.cubeThree.rotation.y += 0.01;
 
-    // console.log(renderer.info.render.calls); //add right above the render call
+    //   // console.log(renderer.info.render.calls); //add right above the render call
     this.renderer.render(this.scene, this.camera);
   };
 
