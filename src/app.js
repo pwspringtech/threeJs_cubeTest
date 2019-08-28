@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+let logo;
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +29,9 @@ class App extends Component {
     this.controls.enableZoom = true;
 
     this.renderer = new THREE.WebGLRenderer({
-      antialias: true
+      antialias: true,
+      gammaOutput: true,
+      gammaFactor: 2.2
     });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(window.devicePixelRatio);
@@ -111,8 +114,8 @@ class App extends Component {
 
     const onLoad = gltf => {
       console.log(gltf);
-      const model = gltf.scene.children[0];
-      this.scene.add(model);
+      logo = gltf.scene.children[0];
+      this.scene.add(logo);
     };
 
     const onProgress = () => {};
@@ -133,6 +136,10 @@ class App extends Component {
 
   animate = () => {
     requestAnimationFrame(this.animate);
+    if (logo) {
+      // logo.rotation.x += 0.01;
+      logo.rotation.y += 0.005;
+    }
     //   // this.cubeOne.rotation.x += 0.01;
     //   // this.cubeOne.rotation.y += 0.01;
     //   // this.cubeTwo.rotation.x += 0.01;
